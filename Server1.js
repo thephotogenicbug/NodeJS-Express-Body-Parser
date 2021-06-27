@@ -4,7 +4,7 @@ const cors = require('cors');
 app.use(cors());
 
 app.get("/city", function(req,res){
-   // res.writeHead(200, {'Content-Type': 'application/json'})
+   // res.writeHead(200, {'Content-Type': 'application/json'}) comment out this link  cause cors is been used 
     var city = ["Bangalore", "Chennai", "Mumbai", "Delhi", "Madras"];
     var jsonData = JSON.stringify(city); // array to json
     res.send(jsonData);
