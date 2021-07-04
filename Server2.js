@@ -23,6 +23,28 @@ app.get("/booklist" , function(req , res){
     })
 })
 
+app.post("/deleteBook", function(req,res){
+    var id = req.body.id;
+    var sql = "delete from book where bookid='"+id+"' "
+    mydatabase.query(sql , function(error , rows, fields){
+     if(error) throw error
+      res.send(id+ " : Book Details Deleted Successfully ");
+      res.end();
+            
+        })
+})
+
+
+app.post("/deleteEmployee", function(req,res){
+    var id = req.body.id;
+    var sql = "delete from emp where empid='"+id+"' "
+    mydatabase.query(sql , function(error , rows, fields){
+     if(error) throw error
+      res.send(id+ " : Employee Details Deleted Successfully ");
+      res.end();
+            
+        })
+})
 
 app.post("/saveemp", function(req , res){
     var employeeName = req.body.empname;
