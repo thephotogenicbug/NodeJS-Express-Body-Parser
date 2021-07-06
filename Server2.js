@@ -14,7 +14,7 @@ const mydatabase = mysql.createConnection({
 });
 mydatabase.connect(); // nodejs will get connected to mysql engine and to reactone databse
 
-
+/* get method */
 app.get("/booklist" , function(req , res){
     mydatabase.query('select * from book' , function(error , rows, fields){
         if(error) throw error
@@ -22,7 +22,7 @@ app.get("/booklist" , function(req , res){
         res.end();
     })
 })
-
+/* delete method */
 app.post("/deleteBook", function(req,res){
     var id = req.body.id;
     var sql = "delete from book where bookid='"+id+"' "
@@ -34,7 +34,7 @@ app.post("/deleteBook", function(req,res){
         })
 })
 
-
+/* delete method */
 app.post("/deleteEmployee", function(req,res){
     var id = req.body.id;
     var sql = "delete from emp where empid='"+id+"' "
@@ -46,6 +46,7 @@ app.post("/deleteEmployee", function(req,res){
         })
 })
 
+/* save method */
 app.post("/saveemp", function(req , res){
     var employeeName = req.body.empname;
     var empsalary = req.body.empsal;
@@ -60,13 +61,24 @@ app.post("/saveemp", function(req , res){
     })
 });
 
-
+ /* get method */
 app.get("/emplist" , function(req , res){
     mydatabase.query('select * from emp order by empid desc' , function(error , rows, fields){
         if(error) throw error
         res.send( JSON.stringify(rows) );
         res.end();
     })
+})
+
+ /* Edit + post method */
+app.post("/getempinfo", function(req,res){
+    var empid = req.body.empid;
+    mydatabase.query("select * from emp where empid='"+empid+"'", function(error , rows, fields){
+        if(error) throw error
+        res.send( JSON.stringify(rows) );
+        res.end();
+    })
+
 })
 
 
