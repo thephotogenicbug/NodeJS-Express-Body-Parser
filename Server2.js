@@ -80,7 +80,21 @@ app.post("/getempinfo", function(req,res){
     })
 
 })
-
+/* update employee details */
+app.post("/updateemp", function(req,res){
+    var  name = req.body.empname;
+    var  salary = req.body.empsal;
+    var  email = req.body.emailid;
+    var  mobile = req.body.mobileno;
+    var  city = req.body.cityname;
+    var  id = req.body.empid;
+    var  sql = "update emp set name='"+name+"', salary='"+salary+"', email='"+email+"', mobile='"+mobile+"', city='"+city+"' where empid='"+id+"' ";
+    mydatabase.query( sql , function(error , rows, fields){
+        if(error) throw error
+        res.send(name +" : Employee Details Updated Successfully !");
+        res.end();
+    })
+})
 
 
 app.listen(2222, function(){
