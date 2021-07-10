@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());  // to parse the body while receiving a request from client
+var fs = require("fs"); // to read and write the content
+
 
 // mysql connection 
 const mysql = require("mysql");
@@ -96,6 +98,23 @@ app.post("/updateemp", function(req,res){
     })
 })
 
+
+app.post("/savefiledata", function(req, res){
+    var data = req.body.textdata;
+    fs.appendFile("message.txt", data, function(){
+        res.send("Contents Added in File Successfully !");
+        res.end();
+    })
+})
+
+app.get("/getfiledata", function(req , res){
+    
+    fs.readFile("message.txt", function(error , filedata){
+        res.writeHead(200 , {'Content-Type':'text/html'});
+        res.write(filedata);
+        res.end();
+    })
+})
 
 app.listen(2222, function(){
     //   http://localhost:2222/booklist
