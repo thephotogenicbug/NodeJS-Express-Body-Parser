@@ -107,11 +107,29 @@ app.post("/savefiledata", function(req, res){
     })
 })
 
+
 app.get("/getfiledata", function(req , res){
-    
     fs.readFile("message.txt", function(error , filedata){
+        if(error){
+            res.send("404 : Sorry File Does not exist");
+            res.end();
+        }
         res.writeHead(200 , {'Content-Type':'text/html'});
         res.write(filedata);
+        res.end();
+    })
+})
+
+app.get("/deletefiledata", function(req,res){
+    fs.writeFile("message.txt", "", function(){
+    res.send("File Contents Deleted Successfully");
+    res.end();    
+    })    
+})
+
+app.get("/deletefile", function(req,res){
+    fs.unlink("message.txt", function(){
+        res.send("File Deleted Successfully");
         res.end();
     })
 })

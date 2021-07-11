@@ -1,2 +1,0 @@
-Hi
-This is a test data sent to nodejs server 
